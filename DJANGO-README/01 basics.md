@@ -7,4 +7,10 @@
 > - At one connection we can only connect one database then how to connect multiple  DB????
 
 > - To create table in database we need to run migration using migration commands
-> - those command will create few =default tables [10] in database by default and also one which we have created in models
+> - those command will create few default tables [10] in database by default and also one which we want to create using models
+
+> - To Store HTML files we make `templates` dir in `app dir` or in `root dir`
+> - but we have to add path of `templates dir` in `project's dir -> settings.py -> TEMPLATES[list] -> DIRS'[list]` so Django know the location of out Templates
+
+> - There is consept call `templates inheritance` which makes easy and dynamic to built site
+> - we can divide HTML portions in diff HTML page and reuse that for other pages just using python templates 

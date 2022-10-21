@@ -15,3 +15,7 @@
   python manage.py makemigrations
   python manage.py migrate
 ```
+#### To Use/Access Django Models data in shell
+```bash
+  python manage.py shell
+```
