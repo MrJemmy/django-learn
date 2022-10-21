@@ -12,5 +12,5 @@ Notes are in `DJANGO-README` folder
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `api_key` | `string` | **Required**. Your API key |
-| `api_key` | `string` | **Required**. Your API key |
+| `api_key` | `string` | **Required**. Your API key |  
 
