@@ -8,9 +8,12 @@
 ### Documents
 Notes are in `DJANGO-README` folder 
 
-### To Learn
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-| `api_key` | `string` | **Required**. Your API key |  
+### TODO
+1. Every File's `.md` file for explanation in detail 
+
+### Admin users 
+| User Name      | password | Email ID | User Type            | permissions                |
+|:---------------|:---------|:---------|:---------------------|:---------------------------|
+| `jaiminpatel`  | **None** | **None** |`admin`               | full access                |
+| `api_key`      |          |          |`string`              | **Required**. Your API key |  
 

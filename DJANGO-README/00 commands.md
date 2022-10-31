@@ -1,6 +1,7 @@
 #### To Create Project `[at the end of command with '.' create project in currunt dir]`
 ```bash
-  python -m django startproject projectname [.]
+  python -m django startproject projectname
+  python -m django startproject projectname .
 ```
 #### To start Django server
 ```bash
@@ -18,4 +19,12 @@
 #### To Use/Access Django Models data in shell
 ```bash
   python manage.py shell
+```
+#### To Create superuser of project 
+```bash
+  python manage.py createsuperuser
+  username : 
+  Email Address :
+  Password : 
+  Password (again): 
 ```

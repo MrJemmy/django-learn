@@ -2,13 +2,20 @@
 <!-- curlly breckets works in link also all most at everywhere in HTML it works-->
 
 {% block content %}
-<h1 style="text-align:center"> Hello {{name}}! </h1>
+    <h1 style="text-align:center"> Hello {{name}}! </h1>
 
-{% for row in model_data %}
-    {% if row.title and row.content %} <!-- How to check multi conditions with operators -->
-        <h2><a href="/user/{{row.id}}/">Title : {{row.title}}</a></h2>
-        <p> Content : {{row.content}}</p>
-    {% endif %}
-{% endfor %}
+    <!-- inputs -->
+    <form action="user/" method="GET"> <!-- url is passed in 'action' and when we submit request that handle by that url -->
+        <input type="text" name="query"/> <!-- every input need name, except submit which create "key : value" pass data based on method of form -->
+        <input type="submit"/>
+    </form>
 
-{% endblock %}
+    <!-- Displaying Output  -->
+    {% for row in model_data %}
+        {% if row.title and row.content %} <!-- How to check multi conditions with operators ???? -->
+            <h2><a href="/user/{{row.id}}/">Title : {{row.title}}</a></h2>
+            <p> Content : {{row.content}}</p>
+        {% endif %}
+    {% endfor %}
+
+{% endblock content%}

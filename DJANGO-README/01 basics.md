@@ -13,4 +13,11 @@
 > - but we have to add path of `templates dir` in `project's dir -> settings.py -> TEMPLATES[list] -> DIRS'[list]` so Django know the location of out Templates
 
 > - There is consept call `templates inheritance` which makes easy and dynamic to built site
-> - we can divide HTML portions in diff HTML page and reuse that for other pages just using python templates 
+> - we can divide HTML portions in diff HTML page and reuse that for other pages just using python templates
+
+> - we can achieve dynamic URL by passing <`int:id`> in `project dir -> urls.py -> urlpatterns[list]` and variable is received as params by `views.py -> viewFunction`
+> - passing variable can be any type but type must define in `urls.py -> urlpatterns[list]`
+
+> - we have to create superuser here and which will give access to `ROOT-URL/admin` of django and because of that we can manipulate data using Admin penal
+> - and also we can create other users with respective permission required.
+> - if we do some change's in app's admin.py file then we can see data of models in admin penal.

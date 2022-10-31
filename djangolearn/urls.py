@@ -17,8 +17,15 @@ from django.contrib import admin
 from django.urls import path
 
 from djangolearn.views import home_view # from .views import home_view
+from firstapp. views import show_data, create_entry
 
 urlpatterns = [
     path('admin/', admin.site.urls), # default
     path('', home_view),
+    path('user/', show_data),
+    path('user/create', create_entry),
+    path('user/<int:id>/', show_data) # re_path also used in to make using Regular Expressions which is complex
 ]
+
+# order in urlpatterns dose matter # make nates in .md file
+# 1. user/    2. user/anything    3. user/<datatype:variablename>
