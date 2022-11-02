@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import FirstModel
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def show_data(request, id=None): # id must be hendeled here
@@ -40,6 +41,7 @@ def show_data(request, id=None): # id must be hendeled here
     # render(request, 'home-view.html', context=context)
 
 # using from django.views.decorators.csrf import csrf_exempt @decorator, we can ignore csrf_token error in post requests
+@login_required # because of this user should be login, it will redirect to Django Default login page we need to reset it in Settings.py
 def create_entry(request):
     if request.method == "POST":
         query_dict = request.POST

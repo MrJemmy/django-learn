@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'firstapp',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'djangolearn.urls'
+
+# when we use @login_required for any function then for login it will redirect based on this variable and we have to set it to replacedefaut
+# and also send this Data { next : "/user/create" } using get request to view of login function so we can redirect to this page
+LOGIN_URL = "/login/"
 
 TEMPLATES = [
     {

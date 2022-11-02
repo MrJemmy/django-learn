@@ -1,5 +1,7 @@
 """ To Render html web pages """
 from django.http import HttpResponse
+from django.views.generic import TemplateView
+
 from firstapp.models import FirstModel
 from django.template.loader import render_to_string  # , get_template
 
@@ -25,3 +27,16 @@ def home_view(request):
     # html_string_3 = template_html.render(context=context)
 
     return HttpResponse(html_string)
+
+# class base view by HG
+class NewHomeView(TemplateView):
+    template_name = 'home-view.html'
+
+    def get_context_data(self, **kwargs):
+        model_data = FirstModel.objects.all()
+        name = 'Jaimin'
+        context = {
+            'name': name,
+            'model_data': model_data,
+        }
+        return context
