@@ -23,6 +23,11 @@ def login_view(request):
             }
             return render(request, "accounts/login.html", context=context)
         login(request, user)
+
+        next_url = request.GET.get('next')
+        if next_url is not None:
+            return redirect(next_url)
+
         return redirect('/')
     return render(request, "accounts/login.html", context={})
 

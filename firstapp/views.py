@@ -7,7 +7,10 @@ def show_data(request, id=None): # id must be hendeled here
 
     show_in_html = True
     if id is not None:
-        model_row = FirstModel.objects.get(id=id)
+        try:
+            model_row = FirstModel.objects.get(id=id)
+        except:
+            model_row = None
         show_in_html = False  # when to show ???
     else:
         query_dict = request.GET
@@ -24,7 +27,11 @@ def show_data(request, id=None): # id must be hendeled here
         query = query_dict.get("query") # <input type="text" name="query"/> # all ways we get string so for 'int' do type conversion
         if query is not None:
             try: # try except is temp solution
-                model_row = FirstModel.objects.get(title=query)
+                if query.isnumeric(): # we can search using ID and Title
+                    id = int(query)
+                    model_row = FirstModel.objects.get(id=id)
+                else:
+                    model_row = FirstModel.objects.get(title=query)
             except:
                 model_row = None
         else:

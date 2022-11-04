@@ -21,3 +21,17 @@
 > - we have to create superuser here and which will give access to `ROOT-URL/admin` of django and because of that we can manipulate data using Admin penal
 > - and also we can create other users with respective permission required.
 > - if we do some change's in app's admin.py file then we can see data of models in admin penal.
+
+> - Using GET and POST Request We can create Search Form, Login Logout, and Also Data or User Crate Form
+> - Data Passed by GET and POST we can use in View's Function as Dicts and also based on that We can also redirect template as we want
+
+> - we can authenticate and login logout user using `from django.contrib.auth import (authenticate,login,logout)` as Django's `/admin` users for our project
+> - we return django shortcut `redirect('URL')` when want to redirect user to other relevant page
+> - and also we can redirect page when we submit form with GET and POST Dict Data but There is  in both redirection .
+
+> - Django Template have Access of few Classes [debug, request, auth, messages] which we can see at `settings.py -> TEMPLATES[LIST] -> OPTIONS`
+> - using that we can check that user is authenticated or not this classes also can be used in view functions 
+> - if we check authentication in view function then for every view function related to that template we have to check for authentication condition but in Template we need to check for that only ones.
+
+> - `from django.contrib.auth.decorators import login_required` @decorator is also used for views when it is required login before accessing that view or Hitting URL
+> - after using that decorator if we try to Hit this decorated URL/view without login, user will redirect to LOGIN page and for that we have to SET that in `settings.py` as `LOGIN_URL[str]` otherwise it will redirect user to default django LOGIN_URL 
