@@ -34,4 +34,16 @@
 > - if we check authentication in view function then for every view function related to that template we have to check for authentication condition but in Template we need to check for that only ones.
 
 > - `from django.contrib.auth.decorators import login_required` @decorator is also used for views when it is required login before accessing that view or Hitting URL
-> - after using that decorator if we try to Hit this decorated URL/view without login, user will redirect to LOGIN page and for that we have to SET that in `settings.py` as `LOGIN_URL[str]` otherwise it will redirect user to default django LOGIN_URL 
+> - after using that decorator if we try to Hit this decorated URL/view without login, user will redirect to LOGIN page and for that we have to SET that in `settings.py` as `LOGIN_URL[str]` otherwise it will redirect user to default django LOGIN_URL
+> - There are other settings related to LOGIN_URL search in `Django Documentation`
+
+> - We can directly create LOGIN form without writing HTML fild with help of `from django import forms`
+> 1. create `form.py` in respective app and import `django.form`
+> 2. By Inheriting `forms.ModelForm` to any class we can replicate Model's fild as Form, and by handelling this calls in view we can create form in which we do not have to save data in Models it will do automatically.
+> 3. By Inheriting `forms.Form` to any class we can create fild using python and by handdeling this class in view we need to push data in database 
+> - we can see both process in `fisrtapp->forms.py` and `firstapp->views.py`
+> - we can see that in `fisrtapp->forms.py->forms.Form` we have created inner class `Meta` to get info's and `clean` function to clean data coming from HTML_FORM 
+> - `clean` function is also we can create in `forms.ModelForm` if needed
+
+> - Django has inbuilt form for Authentication and UserCreation, we can use by `from django.contrib.auth.forms import UserCreationForm, AuthenticationForm`
+> - we can see that in `accounts->views.py` we have implementation HTML and Django form 

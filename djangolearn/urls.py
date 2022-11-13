@@ -18,12 +18,10 @@ from django.urls import path
 
 from djangolearn.views import home_view, NewHomeView  # from .views import home_view
 from firstapp.views import (
-    show_data,
-    create_entry)
+    show_data, create_entry
+)
 from accounts.views import (
-    login_view,
-    logout_view,
-    register_view
+    login_view, logout_view, register_view
 )
 
 # try To keep it in Alphabetical order
@@ -33,6 +31,7 @@ urlpatterns = [
     path('', home_view),
     path('login/', login_view),
     path('logout/', logout_view),
+    path('register/', register_view),
     path('user/', show_data),
     path('user/create', create_entry),
     path('user/<int:id>/', show_data) # re_path also used in to make using Regular Expressions which is complex

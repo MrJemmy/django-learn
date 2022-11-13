@@ -5,12 +5,26 @@
     <div style="margin-top:30px;">
         <form action="" method="post">
             {% csrf_token %} <!-- using this we can use csrf_token in django -->
+            <h3>From Using Django Model Form</h3>
+            {{ modelform.as_p }} <!--we have to put B/W <form> TAG-->
+            <button type="submit" name="django_model_form" style="margin-top:10px;">Create Entry</button>
+        </form>
+        <br><br>
+        <form action="" method="post">
+            {% csrf_token %} <!-- using this we can use csrf_token in django -->
+            <h3>From Using Django Form</h3>
+            {{ form.as_p }} <!--we have to put B/W <form> TAG-->
+            <button type="submit" name="django_form" style="margin-top:10px;">Create Entry</button>
+        </form>
+        <br><br>
+        <form action="" method="post">
+            {% csrf_token %} <!-- using this we can use csrf_token in django -->
+            <h3>Form Using HTML</h3>
             <input type="text" name="title" placeholder="Title" style="margin-top:10px;">
             <br>
             <textarea name="content" cols="30" rows="10" placeholder="Content" style="margin-top:10px;"></textarea>
             <br>
-            <button type="submit" style="margin-top:10px;">Create Entry</button>
-            <br>
+            <button type="submit" name="html_form" style="margin-top:10px;">Create Entry</button>
         </form>
     </div>
 

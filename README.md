@@ -12,8 +12,8 @@ Notes are in `DJANGO-README` folder
 1. Every File's `.md` file for explanation in detail 
 
 ### Admin users 
-| User Name      | password | Email ID | User Type            | permissions                |
-|:---------------|:---------|:---------|:---------------------|:---------------------------|
-| `jaiminpatel`  | **None** | **None** |`admin`               | full access                |
-| `api_key`      |          |          |`string`              | **Required**. Your API key |  
+| User Name     | password      | Email ID | User Type | permissions           |
+|:--------------|:--------------|:---------|:----------|:----------------------|
+| `jaiminpatel` | **8609**      | **None** | `admin`   | full access           |
+| `gunjanpatel` | **asdf@1234** | **None** | `user`    | no access to '/admin' |  
 

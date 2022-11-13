@@ -6,6 +6,17 @@
     <!-- we can directly use this "user.is_authenticated" also because of Django inbuilt Template support's "auth" witch we can see in settings.py -->
     {% if not request.user.is_authenticated %}
         <div style="margin-top:30px;">
+            <h3>This is Built in Django Login Form</h3>
+            <form action="" method="post">
+                {% csrf_token %} <!-- using this we can use csrf_token in django -->
+                {{ django_form.as_p }}
+                <p>Need an account? please <a href="/register">register</a> </p>
+                <br>
+                <button type="submit" name="django_form" style="margin-top:10px;"> Login </button>
+                <!-- This will return error if username password is wrong-->
+                <br>
+            </form>
+            <h3>This is HTML form</h3>
             <form action="" method="post">
                 {% csrf_token %} <!-- using this we can use csrf_token in django -->
                 <input type="text" name="username" placeholder="username" style="margin-top:10px;">
@@ -15,7 +26,9 @@
                 {% if error %}
                 <p style="color:red">{{ error }} </p>
                 {% endif%}
-                <button type="submit" style="margin-top:10px;"> Login </button>
+                <p>Need an account? please <a href="/register">register</a> </p>
+                <br>
+                <button type="submit" name="html_form" style="margin-top:10px;"> Login </button>
                 <br>
             </form>
         </div>
