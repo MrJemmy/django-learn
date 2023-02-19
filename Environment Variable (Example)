@@ -1,8 +1,8 @@
 # NOTE : The .env file should be in the same directory as settings.py
 SECRET_KEY={}
-DEBUG={ 1 or 0}
-ALLOWED_HOSTS=[list of allowed host ] # learn more
-DB_NAME={ database schema name}
+DEBUG={True or False}
+ALLOWED_HOSTS=[list of allowed host] # learn more
+DB_NAME={database schema name}
 DB_USER_NAME={database user name }
 DB_PASSWORD={database password}
 DB_HOST={database host name}
