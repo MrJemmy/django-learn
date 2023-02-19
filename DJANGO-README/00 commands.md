@@ -28,3 +28,16 @@
   Password : 
   Password (again): 
 ```
+##### To gerenare SECURE_KEY 
+```bash
+  from django.core.management.utils import get_random_secret_key
+  print(get_random_secret_key())
+```
+##### Importing From Pycharm Environment variables and from .env file both are SAME[Need Resurch]
+NOTE : The .env file should be in the same directory as settings.py
+```bash
+  import environ
+  env = environ.Env()
+  environ.Env.read_env()
+  env("KEY")
+```
