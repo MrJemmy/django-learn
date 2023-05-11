@@ -107,6 +107,7 @@ DATABASES = {
     }
 }
 
+# when we run test cases then we will use sqlite3
 if 'test' in sys.argv or 'test\_coverage' in sys.argv:
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
     DATABASES['default']['NAME'] = 'db.sqlite3'
