@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import sys
-import dotenv
 # import environ
 from pathlib import Path
 
@@ -19,7 +18,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Importing .env
-dotenv.read_dotenv()
 # env = environ.Env()
 # environ.Env.read_env()
 
@@ -48,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'firstapp',
     'accounts',
-    'store.app.StoreConfig'  # learn more
+    'store.apps.StoreConfig'  # learn more
 ]
 
 MIDDLEWARE = [
@@ -150,6 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# To static files
+STATICFILES_DIRS = [
+    'static'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -34,7 +34,8 @@ urlpatterns = [
     path('register/', register_view),
     path('user/', show_data),
     path('user/create', create_entry),
-    path('user/<int:id>/', show_data) # re_path also used in to make using Regular Expressions which is complex
+    path('user/<int:id>/', show_data),
+    path('ecommerce/', include('store.urls')) # re_path also used in to make using Regular Expressions which is complex
 ]
 
 # order in urlpatterns dose matter # make nates in .md file
