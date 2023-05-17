@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
-import dotenv
 import sys
-from djangolearn.settings import BASE_DIR
 
 
 def main():
-    dotenv.read_dotenv()
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangolearn.settings')
     try:

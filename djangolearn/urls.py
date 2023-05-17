@@ -23,6 +23,8 @@ from firstapp.views import (
 from accounts.views import (
     login_view, logout_view, register_view
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 # try To keep it in Alphabetical order
 urlpatterns = [
@@ -36,7 +38,7 @@ urlpatterns = [
     path('user/create', create_entry),
     path('user/<int:id>/', show_data),
     path('ecommerce/', include('store.urls')) # re_path also used in to make using Regular Expressions which is complex
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this ill allowed to create automatic URL to image
 
 # order in urlpatterns dose matter # make nates in .md file
 # 1. user/    2. user/anything    3. user/<datatype:variablename>
