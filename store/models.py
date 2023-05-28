@@ -37,6 +37,28 @@ class Order(models.Model):
     def __str__(self):
         return str(self.pk)
 
+    @property
+    def shipping(self):
+        shipping = False
+        order_items = self.orderitem_set.all()
+        for item in order_items:
+            if item.product.digital == False:
+                shipping = True
+                break
+        return shipping
+
+    @property
+    def get_cart_total(self):
+        order_items = self.orderitem_set.all()
+        total = sum([itme.get_total for itme in order_items])
+        return total
+
+    @property
+    def get_cart_items(self):
+        order_items = self.orderitem_set.all()
+        total = sum([item.quantity for item in order_items])
+        return total
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -45,6 +67,11 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.pk)+" "+str(self.product)+" "+str(self.quantity)
+
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
