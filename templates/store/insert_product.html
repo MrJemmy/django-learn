@@ -1,0 +1,18 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="col-lg-6" xmlns:input="http://www.w3.org/1999/html">
+        <div class="box-element" id="form-wrapper">
+            <form method="POST" action="" id="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input required class="form-control" type="text" name="product_name" placeholder="Product Name"><br>
+                <input required class="form-control" type="number" step="any" name="price" placeholder="Price"><br>
+                <input type="checkbox" name="is_digital">
+                <label>Is Product Digital</label><br>
+                <label>Select image files  </label>
+                <input type="file"  name="myfile"><br><br>
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+{% endblock content %}

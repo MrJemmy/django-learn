@@ -28,7 +28,7 @@ def home_view(request):
 
     return HttpResponse(html_string)
 
-# class base view by HG
+# class base view by HG for Templates
 class NewHomeView(TemplateView):
     template_name = 'home-view.html'
 

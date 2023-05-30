@@ -130,3 +130,6 @@ dmypy.json
 
 # pycharm
 .idea/
+
+# removing media files
+media/images/

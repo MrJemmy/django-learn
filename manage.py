@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
-import dotenv
 import sys
-from djangolearn.settings import BASE_DIR
 
 
 def main():

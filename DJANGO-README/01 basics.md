@@ -47,3 +47,12 @@
 
 > - Django has inbuilt form for Authentication and UserCreation, we can use by `from django.contrib.auth.forms import UserCreationForm, AuthenticationForm`
 > - we can see that in `accounts->views.py` we have implementation HTML and Django form 
+> - Not Working as expected
+ 
+> - `.env` is file to keep environment variable which should not define in code 
+> - after installing `django-dotenv` module we can access `.env` variables 
+> - to import and read `.env` we have to `dotenv.read_dotenv()` write in `manage.py` file
+
+> - with help of `python manage.py test` we can run `test.py` files which we have to create in `MainApp` Folder 
+> - test is important to create to check necessary conditions before making it public.
+> - 
