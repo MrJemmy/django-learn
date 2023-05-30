@@ -10,24 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-import environ
+import dotenv
+# import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Importing .env
-env = environ.Env()
-environ.Env.read_env()
+dotenv.read_dotenv()
+# env = environ.Env()
+# environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")  # env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = os.environ.get("DEBUG")  # env("DEBUG")
 
 ALLOWED_HOSTS = []
 if not DEBUG:
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'accounts',
     'djangomodels',
     'restframeworklearn'
+    'store.app.StoreConfig'  # learn more
 ]
 
 MIDDLEWARE = [
@@ -101,11 +104,11 @@ WSGI_APPLICATION = 'djangolearn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER_NAME"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
+        'NAME': os.environ.get("DB_NAME"),  # env("DB_NAME"),
+        'USER': os.environ.get("DB_USER_NAME"),  # env("DB_USER_NAME"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),  # env("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),  # env("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),  # env("DB_PORT"),
     }
 }
 
