@@ -31,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), # default
     # path('', NewHomeView.as_view()), # for class base view
     path('', home_view),
+    path('', include('restframeworklearn.urls')),
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
