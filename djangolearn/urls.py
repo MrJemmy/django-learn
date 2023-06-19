@@ -36,7 +36,7 @@ urlpatterns = [
     path('logout/', logout_view),
     path('register/', register_view),
     path('user/', show_data),
-    path('user/create', create_entry),
+    path('user/create/', create_entry),
     path('user/<int:id>/', show_data),
     path('ecommerce/', include('store.urls')) # re_path also used in to make using Regular Expressions which is complex
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this ill allowed to create automatic URL to image

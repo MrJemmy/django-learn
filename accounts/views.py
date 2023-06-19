@@ -24,7 +24,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is None:
                 context = {
-                    "error" : "Invalid username or password"
+                    "error": "Invalid username or password"
                 }
                 return render(request, "accounts/login.html", context=context)
             login(request, user)
@@ -35,7 +35,7 @@ def login_view(request):
     else:
         django_form = AuthenticationForm(request)
         context ={
-            "django_form" : django_form
+            "django_form": django_form
         }
     return render(request, "accounts/login.html", context)
 
