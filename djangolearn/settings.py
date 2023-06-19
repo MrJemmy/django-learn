@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'firstapp',
     'accounts',
     'djangomodels',
-    'restframeworklearn',
+    'restframeworklearn'
     'store.apps.StoreConfig'  # learn more
 ]
 
