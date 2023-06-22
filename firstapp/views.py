@@ -54,8 +54,8 @@ def show_data(request, id=None): # id must be hendeled here
 def create_entry(request):
     show_mata_data = False
 
-    form = firstappForm()
-    # form = firstappForm(request.POST or None)
+    ## this form's are build in 'forms.py' file
+    form = firstappForm() # form = firstappForm(request.POST or None)
     modelform = firstappModelForm(request.POST or None) # always use "request.POST or None" in ModelForm
     if show_mata_data:
         print("===========================================")
