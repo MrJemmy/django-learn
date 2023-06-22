@@ -50,7 +50,7 @@ def show_data(request, id=None): # id must be hendeled here
     # render(request, 'home-view.html', context=context)
 
 # using from django.views.decorators.csrf import csrf_exempt @decorator, we can ignore csrf_token error in post requests
-@login_required # because of this user should be login, it will redirect to Django Default login page we need to reset it in Settings.py
+@login_required  # because of this user should be login, it will redirect to Django Default login page we need to reset it in Settings.py
 def create_entry(request):
     show_mata_data = False
 
@@ -65,7 +65,7 @@ def create_entry(request):
         "form": form,
         "modelform": modelform
     }
-    if request.method == "POST": # if we use line 58 & 60 instead of line 57 & 59 then we do not have to check for POST method in DjangoForm & DjangoModelForm
+    if request.method == "POST":  # if we use line 58 & 60 instead of line 57 & 59 then we do not have to check for POST method in DjangoForm & DjangoModelForm
         query_dict = request.POST
         if show_mata_data:  # make True When you want to see
             print("===========================================")
@@ -85,7 +85,7 @@ def create_entry(request):
             FirstModel.objects.create(title=query_dict.get('title'),content=query_dict.get('content'))
         elif "django_model_form" in query_dict_keys:
             if modelform.is_valid():
-                firstapp_obj = modelform.save() # all below code is not needed in ModelForm's "request.POST or None" while creating form OBJ
+                firstapp_obj = modelform.save()  # all below code is not needed in ModelForm's "request.POST or None" while creating form OBJ
             # modelform = firstappModelForm(request.POST)
             # context['modelform'] = modelform
             # if modelform.is_valid():

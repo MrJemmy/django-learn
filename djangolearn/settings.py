@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'firstapp',
     'accounts',
     'djangomodels',
-    'restframeworklearn'
-    'store.app.StoreConfig'  # learn more
+    'restframeworklearn',
+    'store.apps.StoreConfig',  # learn more
 ]
 
 MIDDLEWARE = [
