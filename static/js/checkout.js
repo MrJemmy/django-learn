@@ -1,5 +1,6 @@
-var shipping = '{{order.shipping}}'
-var total = '{{order.get_cart_total|floatformat:2}}'
+//var shipping = '{{order.shipping}}'
+//console.log(shipping)
+//var total = '{{order.get_cart_total|floatformat:2}}'
 
 if (shipping == 'False'){
     document.getElementById("shipping-info").innerHTML = ''

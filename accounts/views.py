@@ -8,7 +8,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm # Dja
 
 # Create your views here.
 def login_view(request):
+    # Below Authentication is moved in Template side.
     # if request.user.is_authenticated:
+    #     # if user is already logged in we do not need to perform login operation.
     #     return render(request, "accounts/already-logged-in.html", context={})
     if request.method == "POST":
         login_dict = request.POST
@@ -46,6 +48,9 @@ def logout_view(request):
     return render(request, "accounts/logout.html", context={})
 
 def register_view(request):
+    # request.POST or None do 2 things
+    # 1. if request.POST is {} then it will pass None and form.is_valid() != True
+    # 2. if request.POST is not {} then it will get form.is_valid() == True if form data is valid
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         user_obj = form.save()

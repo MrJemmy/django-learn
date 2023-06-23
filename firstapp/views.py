@@ -55,8 +55,8 @@ def show_data(request, id=None):  # id must be hendeled here
 def create_entry(request):
     show_mata_data = False
 
-    form = firstappForm()
-    # form = firstappForm(request.POST or None)
+    # this form's are build in 'forms.py' file
+    form = firstappForm()  # form = firstappForm(request.POST or None) : when to use which
     modelform = firstappModelForm(request.POST or None)  # always use "request.POST or None" in ModelForm
     if show_mata_data:
         print("===========================================")
@@ -90,8 +90,9 @@ def create_entry(request):
         elif "django_model_form" in query_dict_keys:
             if modelform.is_valid():
                 firstapp_obj = modelform.save()  # all below code is not needed in ModelForm's "request.POST or None" while creating form OBJ
-            # modelform = firstappModelForm(request.POST)
-            # context['modelform'] = modelform
+                # below 2 line will re rander form in HTML so it get cleared with data
+                modelform = firstappModelForm() # Here no need for passing data because we need Empty Form
+                context['modelform'] = modelform
             # if modelform.is_valid():
             #     title = modelform.cleaned_data.get("title")
             #     content = modelform.cleaned_data.get("content")

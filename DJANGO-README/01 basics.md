@@ -36,6 +36,7 @@
 > - `from django.contrib.auth.decorators import login_required` @decorator is also used for views when it is required login before accessing that view or Hitting URL
 > - after using that decorator if we try to Hit this decorated URL/view without login, user will redirect to LOGIN page and for that we have to SET that in `settings.py` as `LOGIN_URL[str]` otherwise it will redirect user to default django LOGIN_URL
 > - There are other settings related to LOGIN_URL search in `Django Documentation`
+> - Here also we get `next` params, which gives URL of Page on which we try to open.
 
 > - We can directly create LOGIN form without writing HTML fild with help of `from django import forms`
 > 1. create `form.py` in respective app and import `django.form`
