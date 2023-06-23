@@ -1,13 +1,14 @@
 from django import forms
 from .models import FirstModel
 
+
 # very much look a like ModelAdmin and ModelAdmin Use ModelForm in behind
 class firstappModelForm(forms.ModelForm):
     class Meta:
         model = FirstModel
-        fields = ["title", "content"] # it will only render those fields which are in "Meta -> fields" and same as Type define in Model
+        fields = ["title", "content"]  # it will only render those fields which are in "Meta -> fields" and same as Type define in Model
         # only those Model fild we can skip in which we have set "NotNull = False" Because default "NotNull" is True
-    #optional
+    # optional
     def clean(self):
         data = self.cleaned_data
         title = data.get('title')

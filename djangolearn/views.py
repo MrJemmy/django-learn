@@ -11,11 +11,11 @@ def home_view(request):
     - Return HTML as response (Returning the Response)
     """
     model_data = FirstModel.objects.all()
-    name = 'Jaimin'
+    name = request.user.username
 
     context = {
-        'name' : name,
-        'model_data' : model_data,
+        'name': name,
+        'model_data': model_data,
     }
 
     html_string = render_to_string('home-view.html', context=context)
