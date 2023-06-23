@@ -86,8 +86,9 @@ def create_entry(request):
         elif "django_model_form" in query_dict_keys:
             if modelform.is_valid():
                 firstapp_obj = modelform.save()  # all below code is not needed in ModelForm's "request.POST or None" while creating form OBJ
-            # modelform = firstappModelForm(request.POST)
-            # context['modelform'] = modelform
+                # below 2 line will re rander form in HTML so it get cleared with data
+                modelform = firstappModelForm() # Here no need for passing data because we need Empty Form
+                context['modelform'] = modelform
             # if modelform.is_valid():
             #     title = modelform.cleaned_data.get("title")
             #     content = modelform.cleaned_data.get("content")
