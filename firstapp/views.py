@@ -34,6 +34,8 @@ def show_data(request, id=None):  # id must be hendeled here
                     id = int(query)
                     model_row = FirstModel.objects.get(id=id)
                 else:
+                    # Here Filters return List of Values and get return only one values
+                    # model_row = FirstModel.objects.filter(title=query)
                     model_row = FirstModel.objects.get(title=query)
             except:
                 model_row = None

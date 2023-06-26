@@ -1,11 +1,13 @@
 from django.test import TestCase
-from django.contrib.auth.password_validation import validate_password # google it more
+from django.contrib.auth.password_validation import validate_password # google it more # we use in user creation
 from django.conf import settings # official way but not working here
 import os
 
 # Create your tests here.
 class djangoConfigTest(TestCase):
+    # Django Use Pythons inbuilt unittest methods but with additional Future.
     # def test_anyName(self): # we can create any test by starting with 'test_'
+    #     # if any assert Conditions fail then Test result will be failed
     #     self.assertTrue(1==1)
     #     self.assertFalse(1==2)
     #     self.assertIsNone(None)

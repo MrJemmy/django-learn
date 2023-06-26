@@ -95,23 +95,23 @@ WSGI_APPLICATION = 'djangolearn.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 # Default :- sqlite
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get("DB_NAME"),  # env("DB_NAME"),
-        'USER': os.environ.get("DB_USER_NAME"),  # env("DB_USER_NAME"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),  # env("DB_PASSWORD"),
-        'HOST': os.environ.get("DB_HOST"),  # env("DB_HOST"),
-        'PORT': os.environ.get("DB_PORT"),  # env("DB_PORT"),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.environ.get("DB_NAME"),  # env("DB_NAME"),
+#         'USER': os.environ.get("DB_USER_NAME"),  # env("DB_USER_NAME"),
+#         'PASSWORD': os.environ.get("DB_PASSWORD"),  # env("DB_PASSWORD"),
+#         'HOST': os.environ.get("DB_HOST"),  # env("DB_HOST"),
+#         'PORT': os.environ.get("DB_PORT"),  # env("DB_PORT"),
+#     }
+# }
 
 # when we run test cases then we will use sqlite3
 if 'test' in sys.argv or 'test\_coverage' in sys.argv:
