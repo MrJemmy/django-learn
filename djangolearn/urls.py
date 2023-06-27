@@ -18,7 +18,7 @@ from django.urls import path, include # include for routing app directly to othe
 
 from djangolearn.views import home_view, NewHomeView  # from .views import home_view
 from firstapp.views import (
-    show_data, create_entry
+    show_data, create_entry, show_data_slug
 )
 from accounts.views import (
     login_view, logout_view, register_view
@@ -36,8 +36,9 @@ urlpatterns = [
     path('logout/', logout_view),
     path('register/', register_view),
     path('user/', show_data),
-    path('user/create/', create_entry),
-    path('user/<int:id>/', show_data),
+    path('user/create/', create_entry, name='create-data'),
+    path('user/<int:id>/', show_data, name='user-id'),
+    path('user/<slug:slug>/', show_data_slug, name='user-slug'),
     path('ecommerce/', include('store.urls')) # re_path also used in to make using Regular Expressions which is complex
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this ill allowed to create automatic URL to image
 

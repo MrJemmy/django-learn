@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.db.models.signals import pre_save, post_save  # Diff type of signals are there in Django Learn more.
 from firstapp.othermodels.testmodel import SecondModel
 from .utils import slugify_instance_title
@@ -26,6 +27,12 @@ class FirstModel(models.Model):
         #     self.slug = slugify(self.title)
         # super().save(*args, **kwargs)
         # we avoid to use self.save(), it will crate infinite self loop if we have now used proper conditions.
+
+    def get_absolute_url(self):
+        # This is use of URLs Reverse :- it is 'name' param which we are give  in urls.py to PATH
+        # with help of this we can se this to anywhere in project
+        # return f'{/user/{self.slug}/}'
+        return reverse("user-slug", kwargs={'slug': self.slug})  # kwargs are directly map with dynamic_url
 
 def firstmodel_pre_save(sender, instance, *args, **kwargs):
     print('pre_save')  # print(args, kwargs) : to get more info
