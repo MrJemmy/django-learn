@@ -1,13 +1,42 @@
+from django.conf import settings
 from django.db import models
+from django.db.models import Q
 from django.urls import reverse
 from django.db.models.signals import pre_save, post_save  # Diff type of signals are there in Django Learn more.
 from firstapp.othermodels.testmodel import SecondModel
 from .utils import slugify_instance_title
 
+
+User = settings.AUTH_USER_MODEL  # when we change User in settings then Dynamically it will update here
+# using "from django.contrib.auth.models import User" This also User model is imported
+
 # Create your models here.
 # ALTER TABLE firstapp_firstmodel
 # MODIFY COLUMN slug VARCHAR(255) COLLATE utf8mb4_bin;
+
+class FirstModelQuerySet(models.QuerySet):
+    def search(self, query=None):
+        if query is None or query == '':
+            return self.none() # [] it will return empty list
+        lookups = Q(title__icontains=query) | Q(content__icontains=query)
+        if query.isnumeric():  # we can search using ID and Title
+            id = int(query)
+            lookups = lookups | Q(id=id)
+            data_list = self.filter(lookups)
+        else:
+            data_list = self.filter(lookups)
+        return data_list
+
+class FirstModelManager(models.Manager):
+    # over writing method Here
+    def get_queryset(self):
+        return FirstModelQuerySet(self.model, using=self._db)
+
+    def search(self, query=None):
+        return self.get_queryset().search(query)
+
 class FirstModel(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=120)
     content = models.TextField()
     publish = models.DateField(null=True, blank=True) # Default IS : auto_now_add=False auto_now=False
@@ -20,6 +49,8 @@ class FirstModel(models.Model):
     # 1. While Doing Migrations it will ask to set default
     # 2. We have to specify Default value in fild while creating migrations.
     slug = models.SlugField(null=True, blank=True)
+
+    objects = FirstModelManager()  # to : connect model with Manager
 
     # def save(self, *args, **kwargs):  # force_insert=False, force_update=False, using=None, update_fields=None -> Learn More
         # if self.slug is None:
@@ -78,7 +109,7 @@ post_save.connect(firstmodel_post_save, sender=FirstModel)  # There is also deco
 # obj3.var1 = 'newValue1'
 # obj3.var2 = 'newValue2'
 
-# # ================================================================================================================ # #
+# # ================================================ Lookups ====================================================== # #
 # After "python manage.py shell"
 # from AppName.models import ModelName
 
@@ -95,4 +126,15 @@ post_save.connect(firstmodel_post_save, sender=FirstModel)  # There is also deco
     # __contains
     # it contains jaimin in any name with case sensitive
 
-# use qs.count() insted of len(qs) which is much faster
+# use qs.count() instead of len(qs) which is much faster
+
+
+# # =============================================== ForeignKey ===================================================== # #
+# After "python manage.py shell"
+# from AppName.models import ModelName
+
+# After Building ForeignKey Relation with Model
+# qs = ModelName.objects.filter(user__username='request.user.username')
+# qs will return data of Model which have relation with Current user.
+# user__username :  Model(user filed) --Ref--> UserModel(username Filed)
+# we can also use lookups like this "(user__username__icontains)"

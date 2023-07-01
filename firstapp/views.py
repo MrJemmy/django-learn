@@ -14,6 +14,11 @@ def show_data(request, id=None): # id must be hendeled here
         except:
             model_row = None
         show_in_html = False  # when to show ???
+        context = {
+            'model_row': model_row,
+            'show': show_in_html
+        }
+        return render(request, "firstapp/detail.html", context=context)  # it will combine two steps
     else:
         query_dict = request.GET
 
@@ -27,23 +32,15 @@ def show_data(request, id=None): # id must be hendeled here
 
         # what if search is done using ID ??? how to handle that
         query = query_dict.get("query") # <input type="text" name="query"/> # all ways we get string so for 'int' do type conversion
-        if query is not None:
-            try: # try except is temp solution
-                if query.isnumeric(): # we can search using ID and Title
-                    id = int(query)
-                    model_row = FirstModel.objects.get(id=id)
-                else:
-                    model_row = FirstModel.objects.get(title=query)
-            except:
-                model_row = None
-        else:
-            model_row = None
+        data_list = FirstModel.objects.search(query)
+
+        # data_list = FirstModel.objects.filter(title__icontains='patel').search(query)
 
     context = {
-        'model_row' : model_row,
+        'data_list' : data_list,
         'show' : show_in_html
     }
-    return render(request, "firstapp/detail.html", context=context) # it will combine two steps
+    return render(request, "firstapp/search.html", context=context) # it will combine two steps
 
     # both are same
     # HttpResponse(render_to_string('home-view.html', context=context))

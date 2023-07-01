@@ -8,13 +8,18 @@
             <input type="submit"/>
         </form>
     {% endif %}
-
-    {% if model_row %}
-        <!--  Displaying all data in details -->
-        <h2>Title : {{model_row.title}}</h2>
-        <p> Content : {{model_row.content}}</p>
+    <ol>
+    {% if data_list  %}
+        {% for model_row in data_list %}
+            <li>
+                <!--  Displaying all data in details -->
+                <h2>Title : {{model_row.title}}</h2>
+                <p> Content : {{model_row.content}}</p>
+            </li>
+        {% endfor %}
     {% else %}
         <p> For given search data is not exist </p>
     {% endif %}
+    </ol>
 
 {% endblock content %}
