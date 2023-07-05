@@ -66,8 +66,7 @@ class FirstModel(models.Model):
         return reverse("user-slug", kwargs={'slug': self.slug})  # kwargs are directly map with dynamic_url
 
 def firstmodel_pre_save(sender, instance, *args, **kwargs):
-    print('pre_save')  # print(args, kwargs) : to get more info
-    print(sender,',' ,instance)
+    # print(args, kwargs) : to get more info
     if instance.slug is None:
         # only slugify when slug is None
         instance = slugify_instance_title(instance)
@@ -75,10 +74,8 @@ pre_save.connect(firstmodel_pre_save, sender=FirstModel)  # There is also decora
 # when ever any FirstModel's Data will be saved before that 'firstmodel_pre_save' will run.
 
 def firstmodel_post_save(sender, instance, created, *args, **kwargs):
-    print('post_save')  # print(args, kwargs) : to get more info
-    print(sender, ',', instance)
+    # print(args, kwargs) : to get more info
     if created:
-        print('actual created slug value :', instance.slug)
         instance = slugify_instance_title(instance)
         instance.save()  # here also infinite loop can be created if we do not have flag like created
 post_save.connect(firstmodel_post_save, sender=FirstModel)  # There is also decorator do same thing.

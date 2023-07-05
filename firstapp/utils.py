@@ -1,7 +1,7 @@
 import random
 from django.utils.text import slugify
 
-def slugify_instance_title(instance, save=False, new_slug = None):
+def slugify_instance_title(instance, new_slug=None):
     # we can improve below method. and also we can use DB table for tracking data
     if new_slug is not None:
         slug = new_slug
