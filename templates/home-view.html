@@ -12,10 +12,10 @@
 
 
     <br>
-    <!-- Use of URL Reverse in Template : we can not use "user-slug" & "user-id" Here because this URL need data also to insert  -->
-    <!-- We should use only Urls like "user-slug" & "user-id" when we want to redirect to Fix page Like below -->
-    <!--    <h3>GO to <a href="{% url 'user-slug' slug='hello-world' %}">Hello World</a> page</h3>-->
-    <h3>Click Here to :- <a href="{% url 'create-data' %}">Create User Data</a></h3>
+    <!-- Use of URL Reverse in Template : we can not use "firstapp:show-slug" & "firstapp:show" Here because this URL need data also to insert  -->
+    <!-- We should use only Urls like "firstapp:show-slug" & "firstapp:show" when we want to redirect to Fix page Like below -->
+    <!--    <h3>GO to <a href="{% url 'firstapp:show-slug' slug='hello-world' %}">Hello World</a> page</h3>-->
+    <h3>Click Here to :- <a href="{% url 'firstapp:create' %}">Create User Data</a></h3>
     <!-- Displaying Output  -->
     {% for row in model_data %}
         {% if row.title and row.content %} <!-- How to check multi conditions with operators ???? -->

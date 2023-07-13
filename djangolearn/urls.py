@@ -35,11 +35,9 @@ urlpatterns = [
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
-    path('user/', show_data),
-    path('user/create/', create_entry, name='create-data'),
-    path('user/<int:id>/', show_data, name='user-id'),
-    path('user/<slug:slug>/', show_data_slug, name='user-slug'),
-    path('ecommerce/', include('store.urls')) # re_path also used in to make using Regular Expressions which is complex
+    path('user/', include('firstapp.urls')),
+    path('ecommerce/', include('store.urls')), # re_path also used in to make using Regular Expressions which is complex
+    path('recipes/', include('recipes.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this ill allowed to create automatic URL to image
 
 # order in urlpatterns dose matter # make nates in .md file

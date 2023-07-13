@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'djangomodels',
     'restframeworklearn',
     'store.apps.StoreConfig',  # learn more
+    'recipes'
 ]
 
 MIDDLEWARE = [

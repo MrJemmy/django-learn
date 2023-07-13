@@ -63,7 +63,7 @@ class FirstModel(models.Model):
         # This is use of URLs Reverse :- it is 'name' param which we are give  in urls.py to PATH
         # with help of this we can se this to anywhere in project
         # return f'{/user/{self.slug}/}'
-        return reverse("user-slug", kwargs={'slug': self.slug})  # kwargs are directly map with dynamic_url
+        return reverse("firstapp:show-slug", kwargs={'slug': self.slug})  # kwargs are directly map with dynamic_url
 
 def firstmodel_pre_save(sender, instance, *args, **kwargs):
     print('pre_save')  # print(args, kwargs) : to get more info

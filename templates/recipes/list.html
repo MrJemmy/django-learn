@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <h1 style="text-align:center"> My Recipes </h1>
+    <br>
+    <h3>Click Here to :- <a href="{% url 'recipes:create' %}">Create Recipes</a></h3>
+    <!-- Displaying Output  -->
+    <ul>
+    {% for row in object_list %}
+        <li>
+            <h2><a href="{{row.get_absolute_url}}">name : {{row.name}}</a></h2>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock content%}t %}

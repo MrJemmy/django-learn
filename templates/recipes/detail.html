@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <h2>Name : {{object.name}}
+        <small><a href="{{ object.get_update_url}}">Edit</a></small>
+        <small><a href="{{ object.get_delete_url}}">Delete</a></small>
+    </h2>
+    <p>description : {{object.description}}</p>
+    <p>directions : {{object.directions}}</p>
+    <ol>
+    {% for ingredient in object.get_ingredients %}
+        <li>
+            <h3>{{ ingredient.name }}  <small><a href="{{ ingredient.get_delete_url}}">Delete</a></small></h3>
+        </li>
+    {% endfor %}
+    </ol>
+{% endblock content %}
+
+
+<!--            <p>{{ ingredient.as_mks }}</p>-->
+<!--            <p>{{ ingredient.as_imperial }}</p>-->
