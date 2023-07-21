@@ -154,10 +154,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# To static files
+# # To static files
 STATICFILES_DIRS = [
     'static'
 ]
+# STATIC_ROOT = 'static-collection'
 # To Stor Media witch user has uploaded
 MEDIA_ROOT = 'media/'
 
