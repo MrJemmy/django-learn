@@ -1,7 +1,7 @@
 import requests
 
 # TODO : DO not run using same Title will create repetition
-api_url = "http://127.0.0.1:8000/product/create" # 1 is product id
+api_url = "http://127.0.0.1:8000/drf/product/create" # 1 is product id
 
 params_dict = {
     "title": "Hello Harsh",

@@ -1,6 +1,6 @@
 import requests
 
-api_url = "http://127.0.0.1:8000/get_by_drf_api"
+api_url = "http://127.0.0.1:8000/drf/get_by_drf_api"
 
 get_response = {}
 
@@ -10,10 +10,12 @@ request_type = request_type.lower()
 if request_type == 'get':
     get_response = requests.get(api_url) # Http GET Request
 elif request_type == 'post':
-    get_response = requests.post(api_url, json={'title':'Hello Harsh'})  # Http GET Request
+    get_response = requests.post(api_url, json={'title':'Hello Harsh'})  # Http POST Request
 else:
-    print('Not IN Option')
+    get_response = requests.put(api_url)  # Http PUT Request / Do not know anything Learn.
+    print('Not IN Option, Just For Testing.')
 
-if get_response:
+if get_response is not None:
+    print(get_response)
     print(get_response.json())
     print(get_response.status_code)

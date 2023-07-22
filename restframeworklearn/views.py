@@ -43,6 +43,9 @@ def drf_api_view(request, *args, **kwargs):  # Django Rest Framework API
             # instance = serializer.save()  # will save data into database
             print(serializer.data)  # will give hole models data
         return Response(serializer.data)
+    # else:
+    #     # This else condition will automatically handled by DRF
+    #     return Response({'detail': f'{request.method} is not allowed.'}, status=405)
 
 class ProductDetailAPIview(generics.RetrieveAPIView):
     # Using this we want to serialize data of model
