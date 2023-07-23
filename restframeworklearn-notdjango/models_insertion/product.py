@@ -10,7 +10,7 @@ Product.objects.create(title='Hello Shivam', content='telling Hello to Shivam', 
 
 # to get random data
 random_entry = Product.objects.all().order_by('?').first()
-
-# How we run property of models
+#
+# # How we run property of models
 fist_entry_amt = Product.objects.first().sale_price
 last_entry_amt = Product.objects.last().sale_price

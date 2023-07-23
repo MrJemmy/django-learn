@@ -24,7 +24,7 @@ form.addEventListener('submit', function(e){
 })
 
 document.getElementById("make-payment").addEventListener('click', function(e){
-    submitFromData()
+    submitFormData()
 })
 function submitFormData(){
     console.log("payment button clicked")
@@ -45,7 +45,7 @@ function submitFormData(){
         userFormData.name = form.name.value
         userFormData.email = form.email.value
     }
-    if (shipping == 'False'){
+    if (shipping != 'False'){
         shippingInfo.address = form.address.value
         shippingInfo.city = form.city.value
         shippingInfo.state = form.state.value
@@ -66,6 +66,10 @@ function submitFormData(){
     .then((data) =>{
         console.log('Success:', data);
         alert('Transaction completed');
-        windows.location.href = "{% url 'store'%}"
+
+        cart = {}
+        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
+        console.log('store url',store)
+        window.location.href = store
     })
 }

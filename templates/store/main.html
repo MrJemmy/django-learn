@@ -26,6 +26,28 @@
                 return cookieValue;
             }
             var csrftoken = getToken('csrftoken');
+
+            function getCookie(name){
+                var cookieArr = document.cookie.split(";");
+
+                for (let i = 0; i < cookieArr.length ; i++) {
+                    var cookiePari = cookieArr[i].split("=");
+
+                    if(name == cookiePari[0].trim()){
+                        return decodeURIComponent(cookiePari[1])
+                    }
+                }
+                return null
+            }
+            var cart = JSON.parse(getCookie('cart'))
+            if(cart == undefined){
+                cart = {}
+                console.log('Cart was created')
+                // we can pas single values, so converting object/dict to string
+                document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
+            }
+
+            console.log('cart : ', cart)
         </script>
 
     </head>

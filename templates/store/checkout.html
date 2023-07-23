@@ -74,6 +74,8 @@
 		<!--  How Can we improve this way of using variable -->
 		var shipping = '{{order.shipping}}'
 		var total = '{{order.get_cart_total|floatformat:2}}'
+		var store = "{% url 'store'%}"
+
 	</script>
 	<script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 {% endblock content %}

@@ -20,17 +20,18 @@ def test_api(request, *args, **kwargs):
     return JsonResponse(data)
 
 def get_product_model(request, *args, **kwargs):
-    model_data = Product.objects.all().order_by('?').first()
+    model_data = Product.objects.all().order_by('?').first()  # we can get product in any order
     data = {}
     if model_data:
         # 'model_to_dict' can not handel models property, can not return as json
+        # Here also get issue with Float price converson.
         data = model_to_dict(model_data, fields=['id', 'title', 'price', 'sale_price'])
     return JsonResponse(data)
 
 @api_view(['GET', 'POST'])
 def drf_api_view(request, *args, **kwargs):  # Django Rest Framework API
     if request.method == 'GET':
-        instance = Product.objects.all().order_by('?').first()
+        instance = Product.objects.all().order_by('?').first()  # we can get product in any order
         data = {}
         if instance:
             # serializer can handel models property, can return in json
