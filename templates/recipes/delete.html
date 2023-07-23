@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <form action="{{ object.get_delete_url}}" method="post">
+        {% csrf_token %}
+        <p>Are you sure want to delete {{object.name}}</p>
+        <button type="submit">Yes, Delete.</button>
+    </form>
+{% endblock content%}t %}
