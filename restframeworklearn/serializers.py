@@ -30,7 +30,7 @@ def check_length(value):
     writen to validate command validations for all columns or filds
     """
     if len(value)<5 and (value!=None or value!=''):
-        raise serializers.ValidationError('This Title is already exist')
+        raise serializers.ValidationError('This Title can not be crated')
 
 class ProductSerializer(serializers.Serializer):
     """
@@ -48,7 +48,7 @@ class ProductSerializer(serializers.Serializer):
     query.delete()
     """
     title = serializers.CharField(max_length=160, validators=[check_length])
-    content = serializers.CharField(max_length=160, allow_blank=True)
+    content = serializers.CharField(max_length=160, default=None) # allow_blank=True, allow_null=True ? does not work
     price = serializers.DecimalField(max_digits=15, decimal_places=2, default=99.99)
 
     def create(self, validated_data):
@@ -78,14 +78,14 @@ class ProductSerializer(serializers.Serializer):
         else:
             print(serializer.errors)
         """
-        instance.title = validated_data.get('title', instance.name)
+        instance.title = validated_data.get('title', instance.title)
         instance.content = validated_data.get('content',  instance.content)
         instance.price = validated_data.get('price', instance.price)
         instance.save()
         return instance
 
     # Validations
-    def validated_title(self, value):
+    def validate_title(self, value):
         """
         Fild level validation
         This method is automatic called when "is_valid()" method is called.
@@ -103,5 +103,5 @@ class ProductSerializer(serializers.Serializer):
         title = data.get('title', None)
         content = data.get('content', None)
         if title == content:
-            raise serializers.ValidationError('title and content can not be different')
+            raise serializers.ValidationError(' ')
         return data
