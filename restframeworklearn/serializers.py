@@ -18,6 +18,7 @@ class ProductModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product  # one model can have multiple serializer with diff application
         fields = [
+            'id',       # to get an id in return
             'title',    # this fild only require, while validating for Product model
             'content',  # content is blank=True, null=True so doesn't matter if we pass or not
             'price',    # price has default=99.99 value so same here also

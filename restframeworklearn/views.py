@@ -1,14 +1,16 @@
 import json
-from django.views import View  # from rest_framework.views import APIView  # We Can use this also.
+# from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse, QueryDict
 from django.forms.models import model_to_dict
+
+from rest_framework.views import APIView
 from restframeworklearn.models import Product
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import ProductModelSerializer, ProductSerializer
-from rest_framework import generics  # generics has many view's
+from rest_framework import generics, status  # generics has many view's
 
 def test_api(request, *args, **kwargs):
     request_body = request.body  # this request -> Django's HttpRequest : it returns binary string (b'')
@@ -98,9 +100,9 @@ This class base view used when for one URL you want to create GET, POST, PUT, DE
 to use in urls : path('url/', ClassBaseView.as_view()),
 """
 @method_decorator(csrf_exempt, name='dispatch')
-class TestCRUDView(View):
+class TestCRUDView(APIView):
     def get(self, request, *args, **kwargs):
-        data = request.GET
+        data = request.query_params  # request.GET
         with_model_serializer = int(data.get('with_model_serializer', 1))
         if with_model_serializer:
             serializer = ProductModelSerializer
@@ -108,44 +110,44 @@ class TestCRUDView(View):
             if id:
                 query = Product.objects.get(id=id)
                 serialized = serializer(query)
-                return JsonResponse({"data": [serialized.data]})
+                return Response({"data": [serialized.data]}, status=status.HTTP_200_OK)
             query = Product.objects.all()
             serialized = serializer(query, many=True)
-            return JsonResponse({"data": serialized.data})
+            return Response({"data": serialized.data}, status=status.HTTP_200_OK)
         else:
             serializer = ProductSerializer
             id = int(data.get('id', 0))
             if id:
                 query = Product.objects.get(id=id)
                 serialized = serializer(query)
-                return JsonResponse({"data": [serialized.data]})
+                return Response({"data": [serialized.data]}, status=status.HTTP_200_OK)
             query = Product.objects.all()
             serialized = serializer(query, many=True)
-            return JsonResponse({"data": serialized.data})
+            return Response({"data": serialized.data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-        data = request.POST
-        init_data = request.GET
+        data = request.data # request.POST
+        init_data = request.query_params # request.GET
         with_model_serializer = int(init_data.get('with_model_serializer', 1))
         if with_model_serializer:
             serializer = ProductModelSerializer
             serialized = serializer(data=data)  # **need to write data=data
             if serialized.is_valid():
                 serialized.save()
-                return JsonResponse({"data": "data is created"})
+                return Response({"data": "data is created"}, status=status.HTTP_201_CREATED)
             else:
-                return JsonResponse({"data": serialized.errors})
+                return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
             serializer = ProductSerializer
             serialized = serializer(data=data)  # **need to write data=data
             if serialized.is_valid():
                 serialized.save()
-                return JsonResponse({"data": "data is created"})
+                return Response({"data": "data is created"}, status=status.HTTP_201_CREATED)
             else:
-                return JsonResponse({"data": serialized.errors})
+                return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
     def put(self, request, *args, **kwargs):
-        init_data = request.GET
-        data = QueryDict(request.body)
+        init_data = request.query_params # request.GET
+        data = request.data # QueryDict(request.body)
         id = data.get('id')
         with_model_serializer = int(init_data.get('with_model_serializer', 1))
         if with_model_serializer:
@@ -154,21 +156,21 @@ class TestCRUDView(View):
             serialized = serializer(query, data=data)  # to update whole data
             if serialized.is_valid():
                 serialized.save()
-                return JsonResponse({"data": "data is Updated"})
+                return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
             else:
-                return JsonResponse({"data": serialized.errors})
+                return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
             serializer = ProductSerializer
             query = Product.objects.get(id=id)
             serialized = serializer(query, data=data)  # to update whole data
             if serialized.is_valid():
                 serialized.save()
-                return JsonResponse({"data": "data is Updated"})
+                return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
             else:
-                return JsonResponse({"data": serialized.errors})
+                return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
     def patch(self, request, *args, **kwargs):
-        init_data = request.GET
-        data = QueryDict(request.body)
+        init_data = request.query_params # request.GET
+        data = request.data # QueryDict(request.body)
         id = data.get('id')
         with_model_serializer = int(init_data.get('with_model_serializer', 1))
         if with_model_serializer:
@@ -177,26 +179,26 @@ class TestCRUDView(View):
             serialized = serializer(query, data=data, partial=True)  # to update partial data
             if serialized.is_valid():
                 serialized.save()
-                return JsonResponse({"data": "data is Updated"})
+                return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
             else:
-                return JsonResponse({"data": serialized.errors})
+                return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
             serializer = ProductSerializer
             query = Product.objects.get(id=id)
             serialized = serializer(query, data=data, partial=True)  # to update partial data
             if serialized.is_valid():
                 serialized.save()
-                return JsonResponse({"data": "data is Updated"})
+                return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
             else:
-                return JsonResponse({"data": serialized.errors})
+                return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, *args, **kwargs):
-        id = QueryDict(request.body).get('id')
+        id = request.data.get('id') # QueryDict(request.body).get('id')
         qs = Product.objects.filter(id__icontains=id)
         if qs.exists():
             Product.objects.get(id=id).delete()
-            return JsonResponse({"data" : "deleted successfully"})
-        return JsonResponse({"data": "this data is not exist"})
+            return Response({"data" : "deleted successfully"}, status=status.HTTP_200_OK)
+        return Response({"data": "this data is not exist"}, status=status.HTTP_404_NOT_FOUND)
 
 # from django.views import View
 # from django.views.decorators.csrf import csrf_exempt
