@@ -85,11 +85,13 @@ class ProductCreateAPIview(generics.CreateAPIView):
         # which we want to add
         # we can also use Django signals # need to learn this
 
-class ProductListAPIview(generics.ListAPIView):
+
+## ---------------- This 2 Class Only Needed to Create CRUD --------------------- #
+class ProductListCreateAPIview(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
 
-class ProductListCreateAPIview(generics.ListCreateAPIView):
+class ProductRetrieveUpdateDestroyAPIview(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
 
@@ -101,12 +103,11 @@ to use in urls : path('url/', ClassBaseView.as_view()),
 """
 @method_decorator(csrf_exempt, name='dispatch')
 class TestCRUDView(APIView):
-    def get(self, request, *args, **kwargs):
+    def get(self, request, id=0, *args, **kwargs):
         data = request.query_params  # request.GET
         with_model_serializer = int(data.get('with_model_serializer', 1))
         if with_model_serializer:
             serializer = ProductModelSerializer
-            id = int(data.get('id', 0))
             if id:
                 query = Product.objects.get(id=id)
                 serialized = serializer(query)
@@ -126,8 +127,8 @@ class TestCRUDView(APIView):
             return Response({"data": serialized.data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-        data = request.data # request.POST
-        init_data = request.query_params # request.GET
+        init_data = request.data  # request.POST
+        data = init_data.get('data')
         with_model_serializer = int(init_data.get('with_model_serializer', 1))
         if with_model_serializer:
             serializer = ProductModelSerializer
@@ -145,10 +146,9 @@ class TestCRUDView(APIView):
                 return Response({"data": "data is created"}, status=status.HTTP_201_CREATED)
             else:
                 return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
-    def put(self, request, *args, **kwargs):
-        init_data = request.query_params # request.GET
-        data = request.data # QueryDict(request.body)
-        id = data.get('id')
+    def put(self, request, id=None,  *args, **kwargs):
+        init_data = request.data # QueryDict(request.body)
+        data = init_data.get('data')
         with_model_serializer = int(init_data.get('with_model_serializer', 1))
         if with_model_serializer:
             serializer = ProductModelSerializer
@@ -168,10 +168,9 @@ class TestCRUDView(APIView):
                 return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
             else:
                 return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
-    def patch(self, request, *args, **kwargs):
-        init_data = request.query_params # request.GET
-        data = request.data # QueryDict(request.body)
-        id = data.get('id')
+    def patch(self, request, id=None, *args, **kwargs):
+        init_data = request.data # QueryDict(request.body)
+        data = init_data.get('data')
         with_model_serializer = int(init_data.get('with_model_serializer', 1))
         if with_model_serializer:
             serializer = ProductModelSerializer
@@ -192,20 +191,10 @@ class TestCRUDView(APIView):
             else:
                 return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, *args, **kwargs):
-        id = request.data.get('id') # QueryDict(request.body).get('id')
+    def delete(self, request, id=None, *args, **kwargs):
         qs = Product.objects.filter(id__icontains=id)
         if qs.exists():
             Product.objects.get(id=id).delete()
             return Response({"data" : "deleted successfully"}, status=status.HTTP_200_OK)
         return Response({"data": "this data is not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-# from django.views import View
-# from django.views.decorators.csrf import csrf_exempt
-# from django.utils.decorators import method_decorator
-# @method_decorator(csrf_exempt, name='dispatch')
-# class ClassBaseView(View):
-#   def get(self, request, *args, **kwargs):
-#      pass
-#   def post(self, request, *args, **kwargs):
-#       pass

@@ -42,3 +42,32 @@
 3. RetrieveModelMixing
 4. UpdateModelMixing
 5. DestroyModelMixing
+
+
+#### Mixins + GenericAPIView = Use to build APIViews
+- Basic APIView
+1. ListAPIView (GET method)
+   1. Implementation of ListModelMixin + GenericAPIView
+2. CreateAPIView (POST method)
+   1. Implementation of CreateModelMixing + GenericAPIView
+3. RetrieveAPIView (GET method)
+   1. Implementation of RetrieveModelMixing + GenericAPIView
+   2. model instance only
+4. UpdateAPIView (PUT & PATCH method)
+   1. Implementation of UpdateModelMixing + GenericAPIView
+   2. model instance only
+5. DestroyAPIView (DELETE method)
+   1. Implementation of DestroyModelMixing + GenericAPIView
+   2. model instance only
+- Combination APIview
+6. ListCreateAPIView (GET & POST method)
+    1. ListAPIView + CreateAPIView
+7. RetrieveUpdateAPIView (GET & PUT & PATCH method)
+   1. RetrieveAPIView + UpdateAPIView
+   2. model instance only
+8. RetrieveDestroyAPIView (GET & DELETE method)
+   1. RetrieveAPIView + DestroyAPIView
+   2. model instance only
+9. RetrieveUpdateDestroyAPIView (GET & PUT & PATCH & DELETE method)
+   1. RetrieveAPIView + UpdateAPIView + DestroyAPIView 
+   2. model instance only
