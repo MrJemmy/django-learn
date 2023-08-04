@@ -117,7 +117,6 @@ class TestCRUDView(APIView):
             return Response({"data": serialized.data}, status=status.HTTP_200_OK)
         else:
             serializer = ProductSerializer
-            id = int(data.get('id', 0))
             if id:
                 query = Product.objects.get(id=id)
                 serialized = serializer(query)

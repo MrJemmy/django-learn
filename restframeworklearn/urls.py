@@ -10,7 +10,7 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetailAPIview.as_view()),  # pk is set in ProductDetailAPIvie w.lookup_field, we use pk
     path('product/create/', ProductCreateAPIview.as_view()),
     path('product/getList_create/', ProductListCreateAPIview.as_view()),
-    path('product/getSingel_update_delete/<int:id>', ProductRetrieveUpdateDestroyAPIview.as_view()),
+    path('product/getSingle_update_delete/<int:pk>/', ProductRetrieveUpdateDestroyAPIview.as_view()),
     path('test_crud_view/', TestCRUDView.as_view()),
     path('test_crud_view/<int:id>', TestCRUDView.as_view()),
     # ProductListCreateAPIview.as_view()

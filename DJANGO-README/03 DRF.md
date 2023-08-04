@@ -71,3 +71,5 @@
 9. RetrieveUpdateDestroyAPIView (GET & PUT & PATCH & DELETE method)
    1. RetrieveAPIView + UpdateAPIView + DestroyAPIView 
    2. model instance only
+
+- ListCreateAPIView & RetrieveUpdateDestroyAPIView will create all CRUD oppressions.
