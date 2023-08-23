@@ -86,7 +86,7 @@ class ProductCreateAPIview(generics.CreateAPIView):
         # we can also use Django signals # need to learn this
 
 
-## ---------------- This 2 Class Only Needed to Create CRUD --------------------- #
+## ---------------- This 2 generics Class Only Needed to Create CRUD --------------------- #
 class ProductListCreateAPIview(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer

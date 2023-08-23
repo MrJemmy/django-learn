@@ -44,7 +44,7 @@
 5. DestroyModelMixing
 
 
-#### Mixins + GenericAPIView = Use to build APIViews
+#### Mixins + GenericAPIView = Concrete APIViews
 - Basic APIView
 1. ListAPIView (GET method)
    1. Implementation of ListModelMixin + GenericAPIView
@@ -59,7 +59,7 @@
 5. DestroyAPIView (DELETE method)
    1. Implementation of DestroyModelMixing + GenericAPIView
    2. model instance only
-- Combination APIview
+- Combination Concrete APIview
 6. ListCreateAPIView (GET & POST method)
     1. ListAPIView + CreateAPIView
 7. RetrieveUpdateAPIView (GET & PUT & PATCH method)
@@ -71,3 +71,8 @@
 9. RetrieveUpdateDestroyAPIView (GET & PUT & PATCH & DELETE method)
    1. RetrieveAPIView + UpdateAPIView + DestroyAPIView 
    2. model instance only
+
+
+#### ViewSet
+- combine set of related views in a single class, called a ViewSet
+- no longer need to deal with wiring up the URL conf ourselves.
