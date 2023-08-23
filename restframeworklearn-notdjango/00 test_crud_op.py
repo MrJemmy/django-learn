@@ -26,7 +26,7 @@ elif request_type == 2:
             'title':'Hello 3',
             'content':'This is 3ed Hello'}
     }
-    api_url = "http://127.0.0.1:8000/drf/test_crud_view/"
+    api_url = "http://127.0.0.1:8000/drf/test_crud_view/" 
     get_response = requests.post(api_url, data=json.dumps(data), headers=headers)  # Http POST Request
 elif request_type == 3:
     data = {
@@ -49,7 +49,6 @@ elif request_type == 5:
     api_url = "http://127.0.0.1:8000/drf/test_crud_view/6"
     get_response = requests.delete(api_url, headers=headers)  # Http delete Request
 else:
-    get_response = requests.put(api_url)  # Http PUT Request / Do not know anything Learn.
     print('Not IN Option, Just For Testing.')
 
 if get_response is not None:
