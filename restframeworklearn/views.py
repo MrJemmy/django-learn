@@ -10,7 +10,7 @@ from restframeworklearn.models import Product
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import ProductModelSerializer, ProductSerializer
-from rest_framework import generics, status  # generics has many view's
+from rest_framework import generics, status, viewsets  # generics has many view's
 
 def test_api(request, *args, **kwargs):
     request_body = request.body  # this request -> Django's HttpRequest : it returns binary string (b'')
@@ -95,7 +95,15 @@ class ProductRetrieveUpdateDestroyAPIview(generics.RetrieveUpdateDestroyAPIView)
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
 
+## ---------------- This Class only require for perfoming CRUD --------------------- #
+class ProductModleViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductModelSerializer
 
+## ---------------- This Class only require for perfoming CRUD --------------------- #
+class ProductReadOnlyModleViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductModelSerializer
 
 """
 This class base view used when for one URL you want to create GET, POST, PUT, DELETE all
@@ -117,7 +125,6 @@ class TestCRUDView(APIView):
             return Response({"data": serialized.data}, status=status.HTTP_200_OK)
         else:
             serializer = ProductSerializer
-            id = int(data.get('id', 0))
             if id:
                 query = Product.objects.get(id=id)
                 serialized = serializer(query)

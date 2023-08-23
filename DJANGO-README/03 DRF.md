@@ -72,7 +72,67 @@
    1. RetrieveAPIView + UpdateAPIView + DestroyAPIView 
    2. model instance only
 
+- ListCreateAPIView & RetrieveUpdateDestroyAPIView will create all CRUD oppressions.
 
-#### ViewSet
+
+#### ViewSet & ModelViewSet Class
 - combine set of related views in a single class, called a ViewSet
 - no longer need to deal with wiring up the URL conf ourselves.
+- code :
+  - code in these methods for ViewSet will be all most same as Class Based APIView.
+  - code in these for ModelViewSet will be same as generics APIview (only 2 line of code)
+```bash
+  from rest_framework import viewsets
+  class StudentViewSet(viewsets.ViewSet):
+        # for ViewSet
+        def list(self, request):
+          ......
+        def create(self, request):
+          ......
+        def retrieve(self, request, pk=None):
+          ......
+        def update(self, request, pk=None):
+          ......
+        def partial_update(self, request, pk=None):
+          ......
+        def destroy(self, request, pk=None):
+          ......
+      
+  # for ModelViewSet
+  class StudentViewSet(viewsets.ModleViewSet):
+        queryset = Product.objects.all()
+        serializer_class = ProductModelSerializer
+    
+  # for read only ModelViewSet
+  class StudentViewSet(viewsets.ReadOnlyModleViewSet):
+        queryset = Product.objects.all()
+        serializer_class = ProductModelSerializer
+```
+- URL configration for this
+```bash
+   from django.urls import path, include
+   from django_app import views
+   from rest_framework.routers import DefaultRouter
+   
+   router = DefaultRouter()
+   router.register('url_of_view_set', views.ClassViewSet, basename='test')
+   
+   urlpatterns = [
+      path('base_url/', include(router.urls))
+   ]
+```
+
+- during dispatch, following attributes are available on ViewSet Class (How can we use in ModelViewSet)
+  - basename : URL names that are created.
+  - action : 
+  - detail : 
+  - suffix :
+  - name : 
+  - description :
+
+
+### Authentication 
+
+
+
+
