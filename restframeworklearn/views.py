@@ -100,7 +100,7 @@ class ProductModleViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
 
-## ---------------- This Class only require for perfoming CRUD --------------------- #
+## ---------------- Ready only --------------------- #
 class ProductReadOnlyModleViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer

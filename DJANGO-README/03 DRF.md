@@ -131,7 +131,26 @@
   - description :
 
 
-### Authentication 
+## Authentication 
+    - BasicAuthentication
+    - SessionAuthentication
+    - TokenAuthentication
+    - RemoteUserAuthentication
+    - Custom Authentication
+- first Authentication performs after that Permissions (Authorization) performs in view
+- based on Authentication `self.user` and `self.auth` with get values 
+
+### Permission
+    - AllowAny
+    - IsAuthenticated
+    - IsAdminUser
+    - IsAuthenticatedOrReadOnly
+    - DjangoModelPermissions
+    - DjangoModlePermissionsOrAnonReadOnly
+    - DjangoObjectPermissions
+    - Custom Permissions
+- Grant or deny access of Class and different part of API
+- it uses the `self.user` and `self.auth` to determine request should permitted or not.
 
 
 
