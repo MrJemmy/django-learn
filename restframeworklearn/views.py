@@ -11,6 +11,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import ProductModelSerializer, ProductSerializer
 from rest_framework import generics, status, viewsets  # generics has many view's
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 def test_api(request, *args, **kwargs):
     request_body = request.body  # this request -> Django's HttpRequest : it returns binary string (b'')
@@ -99,6 +101,11 @@ class ProductRetrieveUpdateDestroyAPIview(generics.RetrieveUpdateDestroyAPIView)
 class ProductModleViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    # def list(self, request, *args, **kwargs):
+    #
 
 ## ---------------- Ready only --------------------- #
 class ProductReadOnlyModleViewSet(viewsets.ReadOnlyModelViewSet):
