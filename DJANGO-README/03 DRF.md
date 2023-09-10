@@ -137,6 +137,7 @@
     - TokenAuthentication
     - RemoteUserAuthentication
     - Custom Authentication
+    - JWT Authentication (3ed Party Authentication)
 - first Authentication performs after that Permissions (Authorization) performs in view
 - based on Authentication `self.user` and `self.auth` with get values 
 
@@ -147,10 +148,26 @@
     - IsAuthenticatedOrReadOnly
     - DjangoModelPermissions
     - DjangoModlePermissionsOrAnonReadOnly
-    - DjangoObjectPermissions
+    - DjangoObjectPermissions (Find Self)
     - Custom Permissions
+    - (3ed Party Permission) (Find Self)
+        - DRF - Access Policy
+        - Composed Permissions
+        - REST Condition
+        - DRY Rest Permissions
+        - Django Rest Framework Roles
+        - Django Rest Framework API Key
+        - Django Rest Framework Role Filters
+        - Django Rest Framework PSQ
 - Grant or deny access of Class and different part of API
-- it uses the `self.user` and `self.auth` to determine request should permitted or not.
+- it uses the `self.user` and `self.auth` to determine request should permit or not.
+
+
+- DjangoModelPermissions
+  - GET : user must be Authenticated
+  - POST : user need add permission
+  - PUT and PATCH : user need change permission
+  - DELETE : user need delete permission
 
 
 

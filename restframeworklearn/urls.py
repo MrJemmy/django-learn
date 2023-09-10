@@ -7,12 +7,10 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('view_set', ProductModleViewSet, basename='full_crud')
-router_read_only = DefaultRouter()
-router_read_only.register('view_set_ro', ProductReadOnlyModleViewSet, basename='read_only')
+router.register('view_set_ro', ProductReadOnlyModleViewSet, basename='read_only')
 # use 'test', do not use 'test/' it call request 2 time
 urlpatterns = [
     path('', include(router.urls)),
-    path('', include(router_read_only.urls)),
     path('django_api/', test_api),
     path('get_random_product/', get_product_model),
     path('get_by_drf_api/', drf_api_view),
