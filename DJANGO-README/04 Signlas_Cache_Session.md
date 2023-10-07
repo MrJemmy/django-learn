@@ -135,4 +135,8 @@
   - connection_created : sent when DB wrapper makes initial connection with DataBase
     - helpful when want to send any post connection commands to SQL
   - sender : The Database wrapper class
-  - Connection : DB connection that was open 
+  - Connection : DB connection that was open
+
+
+## CACHING
+
