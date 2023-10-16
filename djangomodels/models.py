@@ -1,7 +1,11 @@
 from django.db import models
 from django.db.models import Q
+from django.contrib.auth import get_user_model
 # we can perform and( Q(condition)  & Q(condition) ), or( Q(condition) | Q(condition) ), negation( ~Q(condition) )
 # Create your models here.
+
+User = get_user_model()
+
 
 class FirstModelQuerySet(models.QuerySet):
     def search(self, query=None):
@@ -46,6 +50,9 @@ class FirstModel(models.Model):
         # we can have multiple ModelManager for one model
         # Here we have inherited Model.QuerySet so all methods of QuerySet all will we will get
     """
+
+    class Meta:
+        abstract = True
 
     def query_set_methods(self):
         get_single_value = FirstModel.objects.get(id=1)  # error if not exist , it returns object not query set
@@ -293,27 +300,28 @@ class Modle2(MyTableOne):
 
     """
         # one to one relation will be form between them
-        # Inserted data in MyTableOne also will be visible in Modle2 and vice versa also True
-        # USING Modle2 we can access MyTableOne also 
+        # Inserted data in MyTableOne also will be visible in Model2 and vice versa also True
+        # USING Model2 we can access MyTableOne also 
     """
 
 
 # Proxy Models
-class ProxyFirstModel(FirstModel):
-    class Meta:
-        proxy = True
-        ordering = ['title']
-    """
-        # this Model is same as FirstModel, TABLE will not be created for this model
-        # we can have diff manger for This MODEL 
-        # we can make few changes in Proxy model Behaviour 
-        # also methods can be diff for Proxy Model
-        # it can be created using only 'single Non Abstract model', can not use multiple Non Abstract model.
-        # proxy can have can be made using Multiple Abstract model class 
-        # we can integrate other proxy model that shared common Non Abstract model
-    """
-    def proxyMethod(self):
-        return self.title
+# class ProxyFirstModel(FirstModel):
+#     class Meta:
+#         abstract = True
+#         proxy = True
+#         ordering = ['title']
+#     """
+#         # this Model is same as FirstModel, TABLE will not be created for this model
+#         # we can have diff manger for This MODEL
+#         # we can make few changes in Proxy model Behaviour
+#         # also methods can be difference for Proxy Model
+#         # it can be created using only 'single Non-Abstract model', can not use multiple Non-Abstract model.
+#         # proxy can have can be made using Multiple Abstract model class
+#         # we can integrate other proxy model that shared common Non-Abstract model
+#     """
+#     def proxyMethod(self):
+#         return self.title
 
 
 ## ONE-to-ONE relationship
