@@ -38,6 +38,7 @@ urlpatterns = [
     path('user/', include('firstapp.urls')),
     path('ecommerce/', include('store.urls')), # re_path also used in to make using Regular Expressions which is complex
     path('recipes/', include('recipes.urls')),
+    path('silk/', include('silk.urls', namespace='silk')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # this ill allowed to create automatic URL to image
 
 # order in urlpatterns dose matter # make nates in .md file

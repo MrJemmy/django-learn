@@ -130,6 +130,7 @@ dmypy.json
 
 # pycharm
 .idea/
+identifier.sqlite
 
 # removing media files
 media/images/

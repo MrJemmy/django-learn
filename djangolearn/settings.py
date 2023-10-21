@@ -48,10 +48,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'firstapp',
     'accounts',
-    'djangomodels',
+    # 'djangomodels',
     'restframeworklearn',
     'store.apps.StoreConfig',  # learn more
-    'recipes'
+    'recipes',
+    'silk',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'djangolearn.urls'
@@ -89,6 +91,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'djangolearn.wsgi.application'
+
+# # Not working Globally, Check why?
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE':5
+# }
 
 
 # Database

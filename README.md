@@ -17,3 +17,7 @@ Notes are in `DJANGO-README` folder
 | `jaiminpatel` | **8609**      | **None** | `admin`   | full access           |
 | `gunjanpatel` | **asdf@1234** | **None** | `user`    | no access to '/admin' |  
 
+
+### Learn 1st (https://www.youtube.com/watch?v=c708Nf0cHrs&t=3606s&ab_channel=CodingEntrepreneurs)
+- 2.30.50 : Custom Authorization/Permission also next topic
+- 3.08.00 : mixins for Permission / How to use for others.

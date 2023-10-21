@@ -5,9 +5,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
-from .serializers import ProductModelSerializer, ProductSerializer
-
-from .models import Product
+from restframeworklearn.serializers import ProductModelSerializer, ProductSerializer
+from restframeworklearn.models import Product
 
 @method_decorator(csrf_exempt, name='dispatch')
 class TestCRUDView(APIView):
@@ -17,11 +16,11 @@ class TestCRUDView(APIView):
         if with_model_serializer:
             serializer = ProductModelSerializer
             if id:
-                query = Product.objects.get(id=id)
+                query = Product.objects.get(id=id)  # get_object_or_404(Product, pk=id)
                 serialized = serializer(query)
                 return Response({"data": [serialized.data]}, status=status.HTTP_200_OK)
             query = Product.objects.all()
-            serialized = serializer(query, many=True)
+            serialized = serializer(query, many=True)  # many=True for multiple data
             return Response({"data": serialized.data}, status=status.HTTP_200_OK)
         else:
             serializer = ProductSerializer
@@ -42,7 +41,10 @@ class TestCRUDView(APIView):
             serialized = serializer(data=data)  # **need to write data=data
             if serialized.is_valid():
                 serialized.save()
-                return Response({"data": "data is created"}, status=status.HTTP_201_CREATED)
+                return Response({
+                    "msg": "data is created",
+                    "data" : serialized.data
+                }, status=status.HTTP_201_CREATED)
             else:
                 return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -63,7 +65,10 @@ class TestCRUDView(APIView):
             serialized = serializer(query, data=data)  # to update whole data
             if serialized.is_valid():
                 serialized.save()
-                return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
+                return Response({
+                    "msg": "data is Updated",
+                    "data" : serialized.data
+                }, status=status.HTTP_200_OK)
             else:
                 return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -82,10 +87,13 @@ class TestCRUDView(APIView):
         if with_model_serializer:
             serializer = ProductModelSerializer
             query = Product.objects.get(id=id)
-            serialized = serializer(query, data=data, partial=True)  # to update partial data
+            serialized = serializer(query, data=data, partial=True, context={"request" : request})  # to update partial data
             if serialized.is_valid():
                 serialized.save()
-                return Response({"data": "data is Updated"}, status=status.HTTP_200_OK)
+                return Response({
+                    "msg": "data is Updated",
+                    "data" : serialized.data
+                }, status=status.HTTP_200_OK)
             else:
                 return Response({"data": serialized.errors}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -101,6 +109,11 @@ class TestCRUDView(APIView):
     def delete(self, request, id=None, *args, **kwargs):
         qs = Product.objects.filter(id__icontains=id)
         if qs.exists():
-            Product.objects.get(id=id).delete()
-            return Response({"data" : "deleted successfully"}, status=status.HTTP_200_OK)
-        return Response({"data": "this data is not exist"}, status=status.HTTP_404_NOT_FOUND)
+            instance = Product.objects.get(id=id)
+            data = ProductModelSerializer(instance).data
+            instance.delete()
+            return Response({
+                "msg" : "deleted successfully",
+                "data" : data
+            }, status=status.HTTP_200_OK)
+        return Response({"msg": "this data is not exist"}, status=status.HTTP_404_NOT_FOUND)
